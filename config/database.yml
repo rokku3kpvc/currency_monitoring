@@ -24,6 +24,7 @@ default: &default
 development:
   <<: *default
   database: currency_monitoring_development
+  password: <%= Rails.application.credentials.dev_db_pass %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -58,6 +59,7 @@ development:
 test:
   <<: *default
   database: currency_monitoring_test
+  password: <%= Rails.application.credentials.dev_db_pass %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
