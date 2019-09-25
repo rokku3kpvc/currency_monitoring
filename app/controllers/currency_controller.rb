@@ -9,6 +9,7 @@ class CurrencyController < ApplicationController
   # GET /admin
   def new
     @currency = Currency.new(is_forced: true)
+    @previous_currency = Currency.forced.last
   end
 
   # POST /currency
@@ -26,7 +27,7 @@ class CurrencyController < ApplicationController
 
   def currency_params
     defaults = { is_forced: true }
-    params.require(:rate)
+    params.require(:currency)
           .permit(:is_forced, :is_forced_by, :rate)
           .reverse_merge(defaults)
   end

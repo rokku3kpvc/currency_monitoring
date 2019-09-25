@@ -1,0 +1,11 @@
+.previous-forced-time.d-none=@previous_currency.is_forced_by.strftime('%B %d, %Y%l:%M %p')
+=form_for :currency do |form|
+  Dollar rate:
+  =form.text_field :rate, value: @previous_currency.rate
+  Forced by:
+  #datetimepicker1.input-group.date{"data-target-input" => "nearest"}
+    =form.text_field :is_forced_by, class: "form-control datetimepicker-input", data: {target:"#datetimepicker1"}
+    .input-group-append{"data-target" => "#datetimepicker1", "data-toggle" => "datetimepicker"}
+      .input-group-text
+        %i.fas.fa-calendar-plus
+  =form.submit 'Create'
