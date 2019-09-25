@@ -7,6 +7,7 @@ class ParseDollarRateJob < ApplicationJob
   def perform(*args)
     initialize_vars
     parse_usd_rate
+    update_rate
   end
 
   private
@@ -19,7 +20,12 @@ class ParseDollarRateJob < ApplicationJob
   def parse_usd_rate
     cbr_page = open(@cbr)
     document = Nokogiri::HTML(cbr_page)
-    @usd_rate = document.xpath(@usd_xpath)
-    puts @usd_rate.text
+    rate = document.xpath(@usd_xpath).text
+    @usd_rate = rate.gsub!(',', '.').to_f
+  end
+
+  def update_rate
+    actual_rate = Currency.new(rate: @usd_rate)
+    'do broadcast' if actual_rate.save!
   end
 end
