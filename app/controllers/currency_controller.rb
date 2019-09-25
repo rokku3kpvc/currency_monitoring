@@ -12,10 +12,16 @@ class CurrencyController < ApplicationController
     @previous_currency = Currency.forced.last
   end
 
-  # POST /currency
+  # POST /admin
   def create
-    @currency = Currency.new currency_params
-    if @currency.save!
+    # @currency = Currency.new currency_params
+    # if @currency.save!
+    #   redirect_to root_path, notice: 'Forced rate created'
+    # else
+    #   flash[:alert] = @currency.errors.full_messages.to_sentence
+    #   render :new
+    # end
+    if Currency.create_forced(currency_params)
       redirect_to root_path, notice: 'Forced rate created'
     else
       flash[:alert] = @currency.errors.full_messages.to_sentence

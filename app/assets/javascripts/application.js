@@ -9,3 +9,5 @@
 //= require tempusdominus-bootstrap-4.js
 //= require cable
 //= require currency
+
+moment.tz.setDefault("Europe/Moscow");

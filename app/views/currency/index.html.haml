@@ -1,2 +1,5 @@
 .container
-  =@currency.rate
+  -if !@currency.nil?
+    =render 'rate'
+  -else
+    .rate-data Нет данных

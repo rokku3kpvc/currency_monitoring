@@ -1,9 +1,12 @@
 $(document).on('turbolinks:load', function() {
-    $('#datetimepicker1').datetimepicker({
-        format: 'MMMM D, YYYY h:mm A',
-        stepping: 15,
+    let moscowDateTime = moment().format('MMMM D, YYYY HH:mm');
+
+    $('#datetimepicker-rate').datetimepicker({
+        format: 'MMMM D, YYYY HH:mm',
+        stepping: 1,
+        startDate: moscowDateTime,
         minDate: Date(),
-        maxDate: new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)),
+        // maxDate: new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)),
         sideBySide: true,
         icons: {
             up: 'fas fa-sort-up',
@@ -16,9 +19,15 @@ $(document).on('turbolinks:load', function() {
     });
 
     updateDateTimeValue();
+    updateCurrencyRate();
 });
 
 function updateDateTimeValue() {
     let lastForceTime = $('.previous-forced-time').html();
     $('.datetimepicker-input').val(lastForceTime);
+}
+
+function updateCurrencyRate() {
+    let lastForceRate = $('.previous-forced-rate').html();
+    $('#currency_rate').val(lastForceRate);
 }

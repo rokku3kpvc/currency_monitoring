@@ -2,12 +2,13 @@ require 'open-uri'
 
 class ParseDollarRateJob < ApplicationJob
   queue_as :default
-  attr_accessor :cbr, :usd_xpath, :usd_rate
+  attr_accessor :cbr, :usd_xpath, :usd_rate, :actual_rate
 
   def perform(*args)
     initialize_vars
     parse_usd_rate
     update_rate
+    broadcast_rate if @actual_rate.save! && @actual_rate.is_not_blocked_by_forced
   end
 
   private
@@ -25,7 +26,10 @@ class ParseDollarRateJob < ApplicationJob
   end
 
   def update_rate
-    actual_rate = Currency.new(rate: @usd_rate)
-    'do broadcast' if actual_rate.save!
+    @actual_rate = Currency.new(rate: @usd_rate)
+  end
+
+  def broadcast_rate
+    ActionCable.server.broadcast "rates_channel", rate: @actual_rate.rate
   end
 end
