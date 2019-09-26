@@ -2,7 +2,10 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery3
-//= require jquery.mask
+//= require jquery.inputmask
+//= require jquery.inputmask.extensions
+//= require jquery.inputmask.numeric.extensions
+//= require jquery.inputmask.date.extensions
 //= require popper
 //= require bootstrap-sprockets
 //= require moment

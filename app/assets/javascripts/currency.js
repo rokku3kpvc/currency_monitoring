@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function() {
     let moscowDateTime = moment().format('MMMM D, YYYY HH:mm');
 
-    $('#currency_rate').mask('000.0000');
+    $('#currency_rate').inputmask('decimal', { rightAlignNumerics: false });
 
     $('#datetimepicker-rate').datetimepicker({
         format: 'MMMM D, YYYY HH:mm',
