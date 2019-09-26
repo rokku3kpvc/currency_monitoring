@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %title CurrencyMonitoring
+    =csrf_meta_tags
+    =csp_meta_tag
+    =stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    =javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    -if notice
+      .alert.alert-success.alert-dismissible{ 'role': 'alert' }
+        %p.m-0= notice
+        %button.close{ type: 'button', 'data-dismiss': 'alert', 'aria-label': 'Close' }
+          %span{ 'aria-hidden': 'true' }
+            &times;
+    -if alert
+      .alert.alert-danger.alert-dismissible{ 'role': 'alert' }
+        %p.m-0= alert
+        %button.close{ type: 'button', 'data-dismiss': 'alert', 'aria-label': 'Close' }
+          %span{ 'aria-hidden': 'true' }
+            &times;
+  %main
+    =yield

@@ -14,7 +14,8 @@ class CurrencyController < ApplicationController
 
   # POST /admin
   def create
-    if Currency.create_forced(currency_params)
+    @currency = Currency.create_forced(currency_params)
+    if @currency.valid?
       redirect_to root_path, notice: 'Forced rate created'
     else
       flash[:alert] = @currency.errors.full_messages.to_sentence

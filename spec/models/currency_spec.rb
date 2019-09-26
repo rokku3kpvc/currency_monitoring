@@ -32,7 +32,7 @@ RSpec.describe Currency, type: :model do
 
       context 'rates' do
         it 'create_forced should not create' do
-          expect(described_class.create_forced(forced_inv_params)).to eq(false)
+          expect(described_class.create_forced(forced_inv_params)).to_not be_valid
         end
       end
     end
