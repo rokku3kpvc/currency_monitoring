@@ -1,4 +1,8 @@
 class Currency < ApplicationRecord
+  validates :rate, presence: true, numericality: { only_float: true, greater_than: 0.0 }
+  validates_inclusion_of :is_forced, in: [true, false]
+  validate :forced_time_valid
+
   scope :forced, -> { where(is_forced: true) }
   scope :parsed, -> { where(is_forced: false) }
 
@@ -16,7 +20,7 @@ class Currency < ApplicationRecord
 
   def self.create_forced(params)
     forced_currency = Currency.new params
-    forced_currency.save! ? forced_currency.update_rates : false
+    forced_currency.save ? forced_currency.update_rates : false
   end
 
   def update_rates
@@ -30,5 +34,13 @@ class Currency < ApplicationRecord
     return true if forced_last.nil?
 
     created_at >= forced_last.is_forced_by
+  end
+
+  private
+
+  def forced_time_valid
+    if is_forced?
+      errors.add(:is_forced_by, :invalid) if is_forced_by < Time.zone.now.utc
+    end
   end
 end
