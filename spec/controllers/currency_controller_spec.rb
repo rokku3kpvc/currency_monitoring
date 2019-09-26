@@ -65,7 +65,7 @@ RSpec.describe CurrencyController, type: :controller do
           post :create, params: invalid_attr
           expect(response).to have_http_status(400)
           expect(response).to render_template(:new)
-          expect(flash[:alert]).to match(/Rate is not a number and Is forced by is invalid/)
+          expect(flash[:alert]).to match(/Rate is not a number and Is forced by/)
         end
       end
     end

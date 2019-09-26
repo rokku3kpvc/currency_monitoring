@@ -1,5 +1,6 @@
 class Currency < ApplicationRecord
   validates :rate, presence: true, numericality: { only_float: true, greater_than: 0.0, less_than_or_equal_to: 999.9999 }
+  validates :is_forced_by, date: { allow_blank: true }
   validate :forced_time_valid
 
   scope :forced, -> { where(is_forced: true) }
@@ -39,8 +40,11 @@ class Currency < ApplicationRecord
   private
 
   def forced_time_valid
-    if is_forced? && !is_forced_by.nil?
-      errors.add(:is_forced_by, :invalid) if is_forced_by < Time.zone.now.utc
+    if is_forced?
+      errors.add(:is_forced_by, "can't be empty") if is_forced_by.nil?
+      errors.add(:is_forced_by, "must be later than the current time is") if (
+        !is_forced_by.nil? && (is_forced_by < Time.zone.now.utc)
+      )
     end
   end
 end
