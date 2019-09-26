@@ -1,0 +1,12 @@
+.rate-data-forced.grid
+  .rate-value__block
+    .rate-description
+      %h5.m-0 Value:
+    .rate-value__content
+      =currency.rate
+      %i.fas.fa-ruble-sign
+  .rate-date__block
+    .rate-description
+      %h5.m-0 Forced time:
+    .rate-date__content
+      =currency.is_forced_by.strftime('%B %d, %Y %H:%M')

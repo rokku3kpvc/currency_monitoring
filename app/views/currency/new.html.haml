@@ -1,13 +1,18 @@
 -unless @previous_currency.nil?
-  .previous-forced-time.d-none=@previous_currency.is_forced_by.strftime('%B %d, %Y%l:%M %p')
+  .previous-forced-time.d-none=@previous_currency.is_forced_by&.strftime('%B %d, %Y %H:%M')
   .previous-forced-rate.d-none=@previous_currency.rate
-=form_for :currency do |form|
-  Dollar rate:
-  =form.text_field :rate
-  Forced by:
-  #datetimepicker-rate.input-group.date{"data-target-input": "nearest"}
-    =form.text_field :is_forced_by, class: "form-control datetimepicker-input", data: {target:"#datetimepicker-rate"}
-    .input-group-append{"data-target": "#datetimepicker-rate", "data-toggle": "datetimepicker"}
-      .input-group-text
-        %i.fas.fa-calendar-plus
-  =form.submit 'Create'
+.forced-create__block
+  =form_for :currency do |form|
+    .input-rate.form-group
+      %h5 Dollar rate:
+      =form.text_field :rate, class: 'fw-input'
+    .input-date.form-group
+      %h5 Forced by:
+      #datetimepicker-rate.input-group.date{"data-target-input": "nearest"}
+        =form.text_field :is_forced_by, class: "form-control datetimepicker-input", data: {target:"#datetimepicker-rate"}
+        .input-group-append{"data-target": "#datetimepicker-rate", "data-toggle": "datetimepicker"}
+          .input-group-text
+            %i.fas.fa-calendar-plus
+    .action-control__block
+      =form.submit 'Submit', class: 'btn btn-success'
+      =link_to 'Back', root_path, class: 'btn btn-danger'

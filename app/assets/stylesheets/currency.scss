@@ -1,3 +1,43 @@
-// Place all the styles related to the currency controller here.
-// They will automatically be included in application.scss.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.rate-data-parsed {
+  .rate-value__content {
+    color: green;
+  }
+}
+.rate-data-forced {
+  .rate-value__content {
+    color: red;
+  }
+}
+.rate-value__block, .rate-date__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+.dollar-sign {
+  text-align: center;
+  background-color: #ddd;
+  padding: 1rem;
+}
+.no-data {
+  text-align: center;
+  border-radius: unset;
+}
+.fw-input, .datetimepicker-input {
+  width: 100%;
+}
+.forced-create__block, .grid {
+  background-color: #eee;
+  padding: 1rem;
+}
+.action-control__block {
+  display: flex;
+  justify-content: space-between;
+}
+.btn {
+  width: 5rem;
+}

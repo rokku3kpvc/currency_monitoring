@@ -16,7 +16,7 @@ App.rates = App.cable.subscriptions.create("RatesChannel", {
 );
 
 function updateRate(rate) {
-    let rateContainer = $('.rate-data');
+    let rateContainer = $('.rate');
     rateContainer.empty();
     rateContainer.append(rate)
 }

@@ -39,6 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'action-cable-testing'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.8'
 end
 

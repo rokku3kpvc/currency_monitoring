@@ -30,6 +30,7 @@ class ParseDollarRateJob < ApplicationJob
   end
 
   def broadcast_rate
-    ActionCable.server.broadcast "rates_channel", rate: @actual_rate.rate
+    broadcast_data = ApplicationController.renderer.render(partial: 'currency/parsed', locals: { currency: @actual_rate })
+    ActionCable.server.broadcast "rates_channel", rate: broadcast_data
   end
 end

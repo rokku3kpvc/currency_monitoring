@@ -1,2 +1,4 @@
-.rate-data
-  =@currency.rate
+-if currency.is_forced?
+  =render partial: 'forced', locals: { currency: currency }
+-else
+  =render partial: 'parsed', locals: { currency: currency }

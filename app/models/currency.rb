@@ -23,7 +23,8 @@ class Currency < ApplicationRecord
   end
 
   def update_rates
-    ActionCable.server.broadcast "rates_channel", rate: rate
+    data = ApplicationController.renderer.render(partial: 'currency/forced', locals: { currency: self })
+    ActionCable.server.broadcast "rates_channel", rate: data
     ParseDollarRateJob.set(wait_until: is_forced_by).perform_later
     self
   end
