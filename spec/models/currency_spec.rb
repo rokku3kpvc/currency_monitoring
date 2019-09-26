@@ -5,6 +5,13 @@ RSpec.describe Currency, type: :model do
   let(:parsed) { create(:currency_parsed) }
   let(:parsed_last) { create(:currency_parsed_last) }
 
+  it { is_expected.to validate_presence_of(:rate) }
+  it { is_expected.not_to allow_value(0).for(:rate) }
+  it { is_expected.not_to allow_value(1000).for(:rate) }
+  it { is_expected.to allow_value(true).for(:is_forced) }
+  it { is_expected.to allow_value(false).for(:is_forced) }
+  it { is_expected.to allow_value(Time.zone.now - 1.minute).for(:is_forced_by) }
+
   describe 'class methods' do
     describe 'with valid settings' do
       before { forced; parsed }

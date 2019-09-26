@@ -19,7 +19,7 @@ class CurrencyController < ApplicationController
       redirect_to root_path, notice: 'Forced rate created'
     else
       flash[:alert] = @currency.errors.full_messages.to_sentence
-      render :new
+      render :new, status: 400
     end
   end
 
