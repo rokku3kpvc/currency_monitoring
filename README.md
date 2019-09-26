@@ -1,24 +1,35 @@
-# README
+# Live dollar rates monitoring app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app demonstrates lifetime dollar rates from [CBR](https://www.cbr.ru/currency_base/daily/).
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+Follow these easy steps to install and start the app:
 
-* System dependencies
+### Configure App
 
-* Configuration
+This app uses cron scheduled jobs with [sidekiq](https://github.com/mperham/sidekiq) adapter. Sodekiq use Redis for storing jobs cache, please install it before you'll run the app. You could configure it in `config/schedule.rb`. I recommend to run cron jobs from rvm virtual environment. When you create one, please change `runner_with_rvm` job type in scheduled file.  
+Also you need to set environment variables to connect with db and get access to `/admin` page.  
+For storing env variables app use [figaro](https://github.com/laserlemon/figaro) gem.
+At last you should install [foreman](https://github.com/ddollar/foreman) for start this application.
 
-* Database creation
+### Set up Rails app
 
-* Database initialization
+First, install the gems required by the application:
 
-* How to run the test suite
+    bundle
 
-* Services (job queues, cache servers, search engines, etc.)
+Next, execute the database migrations/schema setup:
 
-* Deployment instructions
+	rails db:setup
 
-* ...
+### Start the app :rocket:
+
+Once all prepares were made, simply use foreman command for start rails and sidekiq servers.
+
+    foreman start
+
+## So? ...
+
+This app was the last part of FunBox QT. I hope you like it :)  
+Wish u a nice coding

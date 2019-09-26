@@ -5,11 +5,14 @@
   =form_for :currency do |form|
     .input-rate.form-group
       %h5 Dollar rate:
-      =form.text_field :rate, class: 'fw-input'
+      =form.text_field :rate, class: "fw-input form-control", placeholder: "64.4637"
     .input-date.form-group
       %h5 Forced by:
       #datetimepicker-rate.input-group.date{"data-target-input": "nearest"}
-        =form.text_field :is_forced_by, class: "form-control datetimepicker-input", data: {target:"#datetimepicker-rate"}
+        =form.text_field :is_forced_by,
+        class: "form-control datetimepicker-input",
+        data: {target:"#datetimepicker-rate"},
+        placeholder: "December 31, 2019 23:00"
         .input-group-append{"data-target": "#datetimepicker-rate", "data-toggle": "datetimepicker"}
           .input-group-text
             %i.fas.fa-calendar-plus

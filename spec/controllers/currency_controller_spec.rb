@@ -2,8 +2,8 @@ require 'rails_helper'
 
 module AuthHelper
   def http_login
-    user = 'admin'
-    pw = 'admin'
+    user = ENV["admin_name"]
+    pw = ENV["admin_pass"]
     request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(user,pw)
   end
 end
